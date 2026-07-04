@@ -1,0 +1,187 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#eef4ff;
+}
+
+/* Navbar */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:#1e40af;
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    color:#facc15;
+}
+
+/* Hero Section */
+
+.hero{
+    width:90%;
+    max-width:900px;
+    margin:50px auto;
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+    text-align:center;
+}
+
+.hero h1{
+    color:#1e40af;
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#555;
+    font-size:18px;
+    margin-bottom:30px;
+    line-height:1.6;
+}
+
+/* Job Description */
+
+.input-group{
+    text-align:left;
+    margin-bottom:25px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:#1e40af;
+}
+
+.input-group textarea{
+    width:100%;
+    min-height:180px;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+    resize:vertical;
+    outline:none;
+}
+
+.input-group textarea:focus{
+    border-color:#2563eb;
+}
+
+/* File Upload */
+
+input[type=file]{
+    width:100%;
+    padding:12px;
+    border:2px dashed #2563eb;
+    border-radius:10px;
+    background:#f8fbff;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+/* Button */
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:15px 35px;
+    font-size:18px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .nav-links{
+        flex-direction:column;
+        text-align:center;
+        gap:10px;
+    }
+
+    .hero{
+        width:95%;
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    button{
+        width:100%;
+    }
+}
+.form-group{
+    margin:20px 0;
+}
+
+label{
+    display:block;
+    margin-bottom:10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+textarea{
+    width:100%;
+    height:180px;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+    resize:vertical;
+    outline:none;
+}
+
+textarea:focus{
+    border-color:#2563eb;
+}
