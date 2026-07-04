@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Analyzer Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/result.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🤖 AI Resume Analyzer</h1>
+    <!-- Dashboard Cards -->
+
+<div class="dashboard">
+
+    <div class="dashboard-card">
+
+        <h3>📊 ATS Score</h3>
+
+        <h2>{{ ats_score }}%</h2>
+
+        <p>{{ rating }}</p>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3>🎯 Job Match</h3>
+
+        <h2>{{ job_match_score }}%</h2>
+
+        <p>Job Compatibility</p>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3>💻 Skills Found</h3>
+
+        <h2>{{ found_skills|length }}</h2>
+
+        <p>Detected Skills</p>
+
+    </div>
+
+    <div class="dashboard-card">
+
+        <h3>❌ Missing Skills</h3>
+
+        <h2>{{ missing_skills|length }}</h2>
+
+        <p>Need Improvement</p>
+
+    </div>
+
+</div>
+
+    <!-- ATS Score -->
+
+    <div class="card">
+
+        <h2>📊 ATS Score</h2>
+
+        <h3>{{ ats_score }}%</h3>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 style="width: {{ ats_score }}%;">
+
+                {{ ats_score }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Resume Rating -->
+<div class="card">
+
+    <h2>🏆 Resume Strength</h2>
+
+    <h3>{{ strength }}</h3>
+
+</div>
+    <div class="card">
+
+        <h2>⭐ Resume Rating</h2>
+
+        <div class="rating">
+
+            {{ rating }}
+
+        </div>
+
+    </div>
+
+    <!-- Candidate Details -->
+
+    <div class="card">
+
+        <h2>👤 Candidate Details</h2>
+
+        <p><b>Name :</b> {{ name }}</p>
+
+        <p><b>Email :</b> {{ email }}</p>
+
+        <p><b>Phone :</b> {{ phone }}</p>
+
+    </div>
+
+    <!-- Job Match -->
+
+    <div class="card">
+
+        <h2>🎯 Job Match Score</h2>
+
+        <h3>{{ job_match_score }}%</h3>
+
+        <div class="progress">
+
+            <div class="progress-bar"
+                 style="width: {{ job_match_score }}%;">
+
+                {{ job_match_score }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Skills Found -->
+
+    <div class="card">
+
+        <h2>💻 Skills Found</h2>
+
+        <ul>
+
+        {% for skill in found_skills %}
+
+            <li>✅ {{ skill }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Matched Skills -->
+
+    <div class="card">
+
+        <h2>✅ Matched Skills</h2>
+
+        <ul>
+
+        {% for skill in matched_skills %}
+
+            <li>{{ skill }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+        <!-- Missing Skills -->
+
+    <div class="card">
+
+        <h2>❌ Missing Skills</h2>
+
+        <ul>
+
+        {% for skill in missing_skills %}
+
+            <li>❌ {{ skill }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Missing Job Skills -->
+
+    <div class="card">
+
+        <h2>🚫 Missing Job Skills</h2>
+
+        <ul>
+
+        {% for skill in missing_job_skills %}
+
+            <li>❌ {{ skill }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Resume Suggestions -->
+     <!-- AI Feedback -->
+
+<div class="card">
+
+    <h2>🤖 AI Feedback</h2>
+
+    {% if feedback %}
+
+    <ul>
+
+        {% for item in feedback %}
+
+        <li>{{ item }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+    {% else %}
+
+    <p>No feedback available.</p>
+
+    {% endif %}
+
+</div>
+
+    <div class="card">
+
+        <h2>💡 Resume Suggestions</h2>
+
+        <ul>
+
+        {% for suggestion in suggestions %}
+
+            <li>{{ suggestion }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+    </div>
+
+    <!-- Resume Text -->
+
+    <div class="card">
+
+        <h2>📄 Resume Text</h2>
+
+        <pre>{{ text }}</pre>
+
+    </div>
+
+    <!-- Skills Analysis -->
+
+    <div class="card">
+
+        <h2>📊 Skills Analysis</h2>
+
+        <canvas id="skillsChart"></canvas>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="center">
+
+        <a href="/download" class="btn">
+            📄 Download Report
+        </a>
+
+        <a href="/" class="btn secondary">
+            ⬅ Upload Another Resume
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById("skillsChart");
+
+new Chart(ctx, {
+    type: "pie",
+    data: {
+        labels: ["Skills Found", "Missing Skills"],
+        datasets: [{
+            data: [
+                {{ found_skills|length }},
+                {{ missing_skills|length }}
+            ],
+            backgroundColor: [
+                "#22c55e",
+                "#ef4444"
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "bottom"
+            }
+        }
+    }
+});
+
+</script>
+
+</body>
+</html>
