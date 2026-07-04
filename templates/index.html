@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🤖 AI Resume Analyzer
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <h1>Analyze Your Resume with AI</h1>
+
+        <p>
+            Upload your resume and get ATS Score, Skill Analysis,
+            Missing Skills and Resume Suggestions.
+        </p>
+
+        <!-- Upload Form -->
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <!-- Job Description -->
+
+            <div class="input-group">
+
+                <label>📄 Paste Job Description</label>
+
+                <textarea
+                    name="job_description"
+                    rows="8"
+                    placeholder="Paste Job Description Here..."></textarea>
+
+            </div>
+
+            <!-- Resume Upload -->
+
+            <input
+                type="file"
+                name="resume"
+                accept=".pdf"
+                required>
+
+            <br><br>
+
+            <button type="submit">
+                🚀 Analyze Resume
+            </button>
+
+        </form>
+
+    </section>
+
+</body>
+</html>
